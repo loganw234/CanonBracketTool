@@ -39,7 +39,7 @@ Here are some screenshots of the application interface:
 
 - Canon DSLR or mirrorless camera compatible with Canon EDSDK
 - Windows operating system (EDSDK.dll is included for Windows)
-- Python 3.7+
+- Python 3.7+ (3.13.5 Used)
 - Flask and Flask-SocketIO (see requirements.txt)
 
 ## Installation
