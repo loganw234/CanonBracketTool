@@ -1,0 +1,15 @@
+{
+  "id": "quick_stack",
+  "name": "Quick Stack",
+  "description": "Single exposure, 50 frames for stacking",
+  "capture_mode": "fast",
+  "brackets": [
+    {
+      "name": "Main Stack",
+      "iso": 100,
+      "aperture": 8.0,
+      "shutter_speed": "1/250",
+      "frames": 50
+    }
+  ]
+}

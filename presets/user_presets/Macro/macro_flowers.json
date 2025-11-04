@@ -1,0 +1,21 @@
+{
+  "name": "[Macro] Flowers - Full Bloom",
+  "description": "Focus stack for flowers with depth. f/5.6 for background separation, 25 steps handles typical flower depth, slow speed ensures smooth transitions.",
+  "brackets": [
+    {
+      "name": "Base Exposure",
+      "iso": 200,
+      "aperture": 5.6,
+      "shutter_speed": "1/60",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 25,
+    "step_size": 3,
+    "speed": 1,
+    "direction": "near"
+  },
+  "id": "macro_flowers"
+}

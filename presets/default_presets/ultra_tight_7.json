@@ -1,0 +1,63 @@
+{
+  "name": "Ultra-Tight 7-Bracket",
+  "description": "1/3 stop spacing - tests if tighter spacing improves blend quality",
+  "brackets": [
+    {
+      "name": "EV-1.0",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/400",
+      "frames": 3
+    },
+    {
+      "name": "EV-0.67",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/320",
+      "frames": 3
+    },
+    {
+      "name": "EV-0.33",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/250",
+      "frames": 3
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/200",
+      "frames": 3
+    },
+    {
+      "name": "EV+0.33",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/160",
+      "frames": 3
+    },
+    {
+      "name": "EV+0.67",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/125",
+      "frames": 3
+    },
+    {
+      "name": "EV+1.0",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/100",
+      "frames": 3
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "ultra_tight_7"
+}

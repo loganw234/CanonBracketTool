@@ -1,0 +1,35 @@
+{
+  "name": "Fast Shutter Priority",
+  "description": "Faster baseline to freeze atmospheric turbulence better - compensate with more frames",
+  "brackets": [
+    {
+      "name": "Highlights",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/640",
+      "frames": 5
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/320",
+      "frames": 5
+    },
+    {
+      "name": "Shadows",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/160",
+      "frames": 5
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "fast_shutter"
+}

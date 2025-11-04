@@ -1,0 +1,35 @@
+{
+  "name": "Supermoon Efficient 3-Bracket",
+  "description": "1-stop spacing, reduced processing time while maintaining full DR",
+  "brackets": [
+    {
+      "name": "Highlights",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/400",
+      "frames": 3
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/200",
+      "frames": 3
+    },
+    {
+      "name": "Shadows",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/100",
+      "frames": 3
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "supermoon_efficient_3"
+}

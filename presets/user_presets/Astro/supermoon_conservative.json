@@ -1,0 +1,35 @@
+{
+  "name": "Supermoon Conservative",
+  "description": "Darker baseline for very bright supermoon conditions, 2-stop range",
+  "brackets": [
+    {
+      "name": "Highlights",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/500",
+      "frames": 3
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/250",
+      "frames": 3
+    },
+    {
+      "name": "Shadows",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/125",
+      "frames": 3
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "supermoon_conservative"
+}

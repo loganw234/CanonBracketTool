@@ -1,0 +1,22 @@
+{
+  "name": "[Astro] Deep Sky Stacking",
+  "description": "Multiple exposures for deep sky objects (nebulae, galaxies). 20 frames stacked reduces noise significantly. Use tracked mount, delay allows for thermal settling between frames.",
+  "brackets": [
+    {
+      "name": "Light Frames",
+      "iso": 1600,
+      "aperture": 2.8,
+      "shutter_speed": "120",
+      "frames": 20,
+      "delay": 5
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "astro_deep_sky"
+}

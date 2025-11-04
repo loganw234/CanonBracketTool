@@ -1,0 +1,21 @@
+{
+  "name": "[Landscape] Hyperfocal Alternative",
+  "description": "Focus stack instead of f/16+ diffraction. Shoot at f/8 for optical sharpness, 8 focus steps from foreground to infinity. Better sharpness than stopped-down single exposure.",
+  "brackets": [
+    {
+      "name": "Base Exposure",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/60",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 8,
+    "step_size": 5,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "landscape_hyperfocal"
+}

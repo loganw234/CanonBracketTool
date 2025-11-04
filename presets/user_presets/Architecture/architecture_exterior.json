@@ -1,0 +1,21 @@
+{
+  "name": "[Architecture] Exterior Detail",
+  "description": "Focus stack for architectural details where front-to-back sharpness is critical. f/8 for sharpness, 12 focus steps covers building facade depth. Single exposure typically sufficient outdoors.",
+  "brackets": [
+    {
+      "name": "Base Exposure",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/125",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 12,
+    "step_size": 4,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "architecture_exterior"
+}

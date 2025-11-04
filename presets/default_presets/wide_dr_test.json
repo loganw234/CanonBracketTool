@@ -1,0 +1,49 @@
+{
+  "name": "Wide DR Test",
+  "description": "Extreme 5-stop range to see absolute limits and usable bounds",
+  "brackets": [
+    {
+      "name": "Extreme Dark",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/640",
+      "frames": 3
+    },
+    {
+      "name": "Dark",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/320",
+      "frames": 3
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/160",
+      "frames": 3
+    },
+    {
+      "name": "Bright",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/80",
+      "frames": 3
+    },
+    {
+      "name": "Extreme Bright",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/40",
+      "frames": 3
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "wide_dr_test"
+}

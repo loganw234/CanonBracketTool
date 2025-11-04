@@ -1,0 +1,35 @@
+{
+  "name": "[Reproduction] Documents/Books",
+  "description": "High-resolution document scanning. HDR handles varying text/image density. Focus stack ensures sharpness across book curvature. Ideal for archival work.",
+  "brackets": [
+    {
+      "name": "Dark",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/15",
+      "frames": 1
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/30",
+      "frames": 1
+    },
+    {
+      "name": "Bright",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/60",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 8,
+    "step_size": 2,
+    "speed": 1,
+    "direction": "near"
+  },
+  "id": "reproduction_documents"
+}

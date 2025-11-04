@@ -1,0 +1,21 @@
+{
+  "name": "[Macro] Insects - Live Subjects",
+  "description": "Fast focus stack for live insects. Higher aperture (f/11) for more DOF per slice, faster shutter to freeze movement, 20 steps covers typical insect body depth.",
+  "brackets": [
+    {
+      "name": "Base Exposure",
+      "iso": 400,
+      "aperture": 11,
+      "shutter_speed": "1/250",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 20,
+    "step_size": 2,
+    "speed": 3,
+    "direction": "near"
+  },
+  "id": "macro_insects"
+}

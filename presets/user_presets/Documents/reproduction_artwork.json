@@ -1,0 +1,21 @@
+{
+  "name": "[Reproduction] Artwork/Paintings",
+  "description": "Museum-quality flat artwork capture. Focus stack ensures edge-to-edge sharpness across flat plane. f/8 for optimal sharpness, 6 steps handles slight field curvature. Use even lighting.",
+  "brackets": [
+    {
+      "name": "Base Exposure",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/30",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 6,
+    "step_size": 2,
+    "speed": 1,
+    "direction": "near"
+  },
+  "id": "reproduction_artwork"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "[Astro] Milky Way + Foreground",
+  "description": "Two-bracket technique: fast wide aperture for stars, slower for foreground detail. Blend in post. Focus stack optional for extreme foreground depth.",
+  "brackets": [
+    {
+      "name": "Sky",
+      "iso": 3200,
+      "aperture": 2.8,
+      "shutter_speed": "20",
+      "frames": 5
+    },
+    {
+      "name": "Foreground",
+      "iso": 800,
+      "aperture": 2.8,
+      "shutter_speed": "120",
+      "frames": 3
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "astro_milky_way_blend"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "[Astro] Star Trails",
+  "description": "Extended sequence for star trail composites. 60+ frames with 30s delay allows continuous arc without gaps. Stack in 'lighten' mode for trails. Adjust frame count for desired trail length.",
+  "brackets": [
+    {
+      "name": "Trail Frames",
+      "iso": 400,
+      "aperture": 4,
+      "shutter_speed": "30",
+      "frames": 60,
+      "delay": 2
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "astro_star_trails"
+}

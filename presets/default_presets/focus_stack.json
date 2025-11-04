@@ -1,0 +1,20 @@
+{
+  "id": "focus_stack",
+  "name": "Focus Stack",
+  "description": "Focus stacking for macro photography",
+  "capture_mode": "standard",
+  "brackets": [
+    {
+      "name": "Focus Stack",
+      "iso": 100,
+      "aperture": 8.0,
+      "shutter_speed": "1/60",
+      "frames": 10
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 10,
+    "step_size": 3
+  }
+}

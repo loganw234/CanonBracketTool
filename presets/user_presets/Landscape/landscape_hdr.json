@@ -1,0 +1,29 @@
+{
+  "id": "landscape_hdr",
+  "name": "Landscape HDR",
+  "description": "3-bracket HDR for landscapes",
+  "capture_mode": "standard",
+  "brackets": [
+    {
+      "name": "Underexposed",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/250",
+      "frames": 3
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/60",
+      "frames": 3
+    },
+    {
+      "name": "Overexposed",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/15",
+      "frames": 3
+    }
+  ]
+}

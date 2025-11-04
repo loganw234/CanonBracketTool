@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canon Exposure Bracketing Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="dark-mode">
+    <header>
+        <div class="logo">
+            <i class="fas fa-camera"></i>
+            <h1>Canon Exposure Bracketing Tool</h1>
+        </div>
+        <div class="camera-status">
+            <span id="connection-status" class="status-indicator disconnected">
+                <i class="fas fa-circle"></i> Disconnected
+            </span>
+            <button id="connect-btn" class="btn primary">Connect Camera</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h2>Presets</h2>
+                <div class="preset-actions">
+                    <button id="new-preset-btn" class="btn small">New</button>
+                    <button id="import-preset-btn" class="btn small">Import</button>
+                </div>
+                <div class="preset-list" id="preset-list">
+                    <!-- Presets will be loaded here -->
+                    <div class="preset-item skeleton"></div>
+                    <div class="preset-item skeleton"></div>
+                    <div class="preset-item skeleton"></div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Camera Info</h2>
+                <div id="camera-info" class="camera-info">
+                    <div class="info-item">
+                        <span class="info-label">Model:</span>
+                        <span class="info-value" id="camera-model">Not connected</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Battery:</span>
+                        <span class="info-value" id="camera-battery">--</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Available Shots:</span>
+                        <span class="info-value" id="camera-shots">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Current Settings</h2>
+                <div id="current-settings" class="current-settings">
+                    <div class="settings-item">
+                        <span class="settings-label">ISO:</span>
+                        <span class="settings-value" id="current-iso">--</span>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">Aperture:</span>
+                        <span class="settings-value" id="current-aperture">--</span>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">Shutter:</span>
+                        <span class="settings-value" id="current-shutter">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="bracket-editor">Bracket Editor</button>
+                <button class="tab-btn" data-tab="capture-control">Capture Control</button>
+                <button class="tab-btn" data-tab="settings">Settings</button>
+            </div>
+
+            <div class="tab-content active" id="bracket-editor">
+                <div class="editor-header">
+                    <div class="preset-info">
+                        <input type="text" id="preset-name" placeholder="Preset Name" class="preset-name-input">
+                        <textarea id="preset-description" placeholder="Description" class="preset-description-input"></textarea>
+                    </div>
+                    <div class="editor-actions">
+                        <button id="save-preset-btn" class="btn">Save Preset</button>
+                        <button id="export-preset-btn" class="btn">Export</button>
+                    </div>
+                </div>
+
+
+                <div class="bracket-list" id="bracket-list">
+                    <!-- Brackets will be added here -->
+                    <div class="empty-state">
+                        <i class="fas fa-layer-group"></i>
+                        <p>No brackets added yet</p>
+                        <button id="add-bracket-btn" class="btn primary">Add Bracket</button>
+                    </div>
+                </div>
+
+                <div class="bracket-actions">
+                    <button id="add-bracket-btn-bottom" class="btn">Add Bracket</button>
+                    <button id="generate-ev-brackets-btn" class="btn">Generate EV Brackets</button>
+                </div>
+
+                <div class="focus-stack-section" id="focus-stack-section">
+                    <h3>Focus Stacking</h3>
+                    <div class="focus-stack-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="focus-stack-enabled">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Enable Focus Stacking</span>
+                    </div>
+                    <div class="focus-stack-options" id="focus-stack-options">
+                        <div class="form-group">
+                            <label for="focus-steps">Focus Positions Per Frame:</label>
+                            <input type="number" id="focus-steps" min="2" max="50" value="10">
+                            <small class="help-text">Number of different focus positions to capture for each frame in the bracket</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="focus-step-size">Step Size:</label>
+                            <input type="number" id="focus-step-size" min="1" max="10" value="3">
+                            <small class="help-text">Relative distance between focus positions</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="focus-speed">Focus Speed:</label>
+                            <select id="focus-speed">
+                                <option value="1">Slow (Precise)</option>
+                                <option value="2" selected>Medium</option>
+                                <option value="3">Fast</option>
+                            </select>
+                            <small class="help-text">Speed of focus motor movement</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="focus-direction">Focus Direction:</label>
+                            <select id="focus-direction">
+                                <option value="near" selected>Near to Far (Focus on nearest point)</option>
+                                <option value="far">Far to Near (Focus on farthest point)</option>
+                            </select>
+                            <small class="help-text">Direction to move focus during stacking</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="capture-control">
+                <div class="capture-header">
+                    <h2>Capture Control</h2>
+                    <div class="capture-mode">
+                        <span>Capture Mode:</span>
+                        <div class="toggle-group">
+                            <button class="toggle-btn active" data-mode="standard">Standard</button>
+                            <button class="toggle-btn" data-mode="fast">Fast</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="capture-info">
+                    <div class="info-card">
+                        <h3>Standard Mode</h3>
+                        <p>Images download to computer after each shot</p>
+                        <p>More reliable, but slower (~3-4 seconds per shot)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Fast Mode</h3>
+                        <p>Images save to SD card during shooting</p>
+                        <p>Much faster capture rate (~0.5-1 second per shot)</p>
+                        <p>Bulk download after capture completes</p>
+                    </div>
+                </div>
+
+                <div class="capture-settings">
+                    <div class="form-group">
+                        <label for="save-directory">Save Directory:</label>
+                        <input type="text" id="save-directory" value="captures/capture_{{ timestamp }}">
+                    </div>
+                </div>
+
+                <div class="capture-summary">
+                    <h3>Capture Summary</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Brackets:</span>
+                        <span class="summary-value" id="summary-brackets">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Frames:</span>
+                        <span class="summary-value" id="summary-frames">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Estimated Time:</span>
+                        <span class="summary-value" id="summary-time">0 min</span>
+                    </div>
+                </div>
+
+                <div class="capture-actions">
+                    <button id="start-capture-btn" class="btn primary large">Start Capture</button>
+                    <button id="stop-capture-btn" class="btn danger large" disabled>Stop Capture</button>
+                </div>
+
+                <div class="capture-progress" id="capture-progress">
+                    <h3>Capture Progress</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">0%</div>
+                    </div>
+                    <div class="progress-details">
+                        <div class="progress-item">
+                            <span class="progress-label">Current Bracket:</span>
+                            <span class="progress-value" id="progress-bracket">-</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Current Frame:</span>
+                            <span class="progress-value" id="progress-frame">-</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Completed:</span>
+                            <span class="progress-value" id="progress-completed">-</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Failed:</span>
+                            <span class="progress-value" id="progress-failed">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="settings">
+                <h2>Application Settings</h2>
+                
+                <div class="settings-section">
+                    <h3>Interface</h3>
+                    <div class="form-group">
+                        <label for="theme-select">Theme:</label>
+                        <select id="theme-select">
+                            <option value="dark">Dark</option>
+                            <option value="light">Light</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Default Save Location</h3>
+                    <div class="form-group">
+                        <label for="default-save-dir">Default Directory:</label>
+                        <input type="text" id="default-save-dir" value="captures">
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Camera Connection</h3>
+                    <div class="form-group">
+                        <label for="auto-connect">Auto Connect:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="auto-connect" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button id="save-settings-btn" class="btn primary">Save Settings</button>
+                    <button id="reset-settings-btn" class="btn">Reset to Defaults</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="bracket-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Bracket</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="bracket-name">Name:</label>
+                    <input type="text" id="bracket-name" placeholder="Bracket Name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bracket-iso">ISO:</label>
+                    <select id="bracket-iso">
+                        <option value="50">50</option>
+                        <option value="64">64</option>
+                        <option value="80">80</option>
+                        <option value="100">100</option>
+                        <option value="125">125</option>
+                        <option value="160">160</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="320">320</option>
+                        <option value="400">400</option>
+                        <option value="500">500</option>
+                        <option value="640">640</option>
+                        <option value="800">800</option>
+                        <option value="1000">1000</option>
+                        <option value="1250">1250</option>
+                        <option value="1600">1600</option>
+                        <option value="2000">2000</option>
+                        <option value="2500">2500</option>
+                        <option value="3200">3200</option>
+                        <option value="4000">4000</option>
+                        <option value="5000">5000</option>
+                        <option value="6400">6400</option>
+                        <option value="8000">8000</option>
+                        <option value="10000">10000</option>
+                        <option value="12800">12800</option>
+                        <option value="25600">25600</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bracket-aperture">Aperture:</label>
+                    <select id="bracket-aperture">
+                        <option value="1.0">f/1.0</option>
+                        <option value="1.2">f/1.2</option>
+                        <option value="1.4">f/1.4</option>
+                        <option value="1.8">f/1.8</option>
+                        <option value="2.0">f/2.0</option>
+                        <option value="2.2">f/2.2</option>
+                        <option value="2.5">f/2.5</option>
+                        <option value="2.8">f/2.8</option>
+                        <option value="3.2">f/3.2</option>
+                        <option value="3.5">f/3.5</option>
+                        <option value="4.0">f/4.0</option>
+                        <option value="4.5">f/4.5</option>
+                        <option value="5.0">f/5.0</option>
+                        <option value="5.6">f/5.6</option>
+                        <option value="6.3">f/6.3</option>
+                        <option value="7.1">f/7.1</option>
+                        <option value="8.0">f/8.0</option>
+                        <option value="9.0">f/9.0</option>
+                        <option value="10.0">f/10.0</option>
+                        <option value="11.0">f/11.0</option>
+                        <option value="13.0">f/13.0</option>
+                        <option value="14.0">f/14.0</option>
+                        <option value="16.0">f/16.0</option>
+                        <option value="18.0">f/18.0</option>
+                        <option value="20.0">f/20.0</option>
+                        <option value="22.0">f/22.0</option>
+                        <option value="25.0">f/25.0</option>
+                        <option value="29.0">f/29.0</option>
+                        <option value="32.0">f/32.0</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bracket-shutter">Shutter Speed:</label>
+                    <select id="bracket-shutter">
+                        <option value="60">60"</option>
+                        <option value="30">30"</option>
+                        <option value="25">25"</option>
+                        <option value="20">20"</option>
+                        <option value="15">15"</option>
+                        <option value="13">13"</option>
+                        <option value="10">10"</option>
+                        <option value="8">8"</option>
+                        <option value="6">6"</option>
+                        <option value="5">5"</option>
+                        <option value="4">4"</option>
+                        <option value="3.2">3.2"</option>
+                        <option value="2.5">2.5"</option>
+                        <option value="2">2"</option>
+                        <option value="1.6">1.6"</option>
+                        <option value="1.3">1.3"</option>
+                        <option value="1">1"</option>
+                        <option value="0.8">0.8"</option>
+                        <option value="0.6">0.6"</option>
+                        <option value="0.5">0.5"</option>
+                        <option value="0.4">0.4"</option>
+                        <option value="0.3">0.3"</option>
+                        <option value="1/3">1/3</option>
+                        <option value="1/4">1/4</option>
+                        <option value="1/5">1/5</option>
+                        <option value="1/6">1/6</option>
+                        <option value="1/8">1/8</option>
+                        <option value="1/10">1/10</option>
+                        <option value="1/13">1/13</option>
+                        <option value="1/15">1/15</option>
+                        <option value="1/20">1/20</option>
+                        <option value="1/25">1/25</option>
+                        <option value="1/30">1/30</option>
+                        <option value="1/40">1/40</option>
+                        <option value="1/50">1/50</option>
+                        <option value="1/60">1/60</option>
+                        <option value="1/80">1/80</option>
+                        <option value="1/100">1/100</option>
+                        <option value="1/125">1/125</option>
+                        <option value="1/160">1/160</option>
+                        <option value="1/200">1/200</option>
+                        <option value="1/250">1/250</option>
+                        <option value="1/320">1/320</option>
+                        <option value="1/400">1/400</option>
+                        <option value="1/500">1/500</option>
+                        <option value="1/640">1/640</option>
+                        <option value="1/800">1/800</option>
+                        <option value="1/1000">1/1000</option>
+                        <option value="1/1250">1/1250</option>
+                        <option value="1/1600">1/1600</option>
+                        <option value="1/2000">1/2000</option>
+                        <option value="1/3200">1/3200</option>
+                        <option value="1/4000">1/4000</option>
+                        <option value="1/6400">1/6400</option>
+                        <option value="1/8000">1/8000</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bracket-frames">Number of Frames:</label>
+                    <input type="number" id="bracket-frames" min="1" max="100" value="10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bracket-delay">Delay Between Shots:</label>
+                    <div class="delay-input-group">
+                        <input type="number" id="bracket-delay" min="0" max="86400" value="0" step="0.5">
+                        <select id="bracket-delay-unit">
+                            <option value="1">Seconds</option>
+                            <option value="60">Minutes</option>
+                            <option value="3600">Hours</option>
+                        </select>
+                    </div>
+                    <small class="help-text">Optional delay between each shot (0 = use default delay)</small>
+                    <small class="help-text">For timelapse: set longer delays (up to 24 hours)</small>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button id="bracket-modal-cancel" class="btn">Cancel</button>
+                <button id="bracket-modal-save" class="btn primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="ev-brackets-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Generate EV Brackets</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="ev-base-iso">Base ISO:</label>
+                    <select id="ev-base-iso">
+                        <option value="50">50</option>
+                        <option value="64">64</option>
+                        <option value="80">80</option>
+                        <option value="100">100</option>
+                        <option value="125">125</option>
+                        <option value="160">160</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="320">320</option>
+                        <option value="400">400</option>
+                        <option value="500">500</option>
+                        <option value="640">640</option>
+                        <option value="800">800</option>
+                        <option value="1000">1000</option>
+                        <option value="1250">1250</option>
+                        <option value="1600">1600</option>
+                        <option value="3200">3200</option>
+                        <option value="6400">6400</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ev-base-aperture">Base Aperture:</label>
+                    <select id="ev-base-aperture">
+                        <option value="1.4">f/1.4</option>
+                        <option value="2.0">f/2.0</option>
+                        <option value="2.8">f/2.8</option>
+                        <option value="3.5">f/3.5</option>
+                        <option value="4.0">f/4.0</option>
+                        <option value="4.5">f/4.5</option>
+                        <option value="5.0">f/5.0</option>
+                        <option value="5.6">f/5.6</option>
+                        <option value="6.3">f/6.3</option>
+                        <option value="7.1">f/7.1</option>
+                        <option value="8.0" selected>f/8.0</option>
+                        <option value="9.0">f/9.0</option>
+                        <option value="10.0">f/10.0</option>
+                        <option value="11.0">f/11.0</option>
+                        <option value="13.0">f/13.0</option>
+                        <option value="16.0">f/16.0</option>
+                        <option value="18.0">f/18.0</option>
+                        <option value="22.0">f/22.0</option>
+                        <option value="32.0">f/32.0</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ev-base-shutter">Base Shutter Speed:</label>
+                    <select id="ev-base-shutter">
+                        <option value="30">30"</option>
+                        <option value="15">15"</option>
+                        <option value="8">8"</option>
+                        <option value="4">4"</option>
+                        <option value="2">2"</option>
+                        <option value="1">1"</option>
+                        <option value="1/2">1/2</option>
+                        <option value="1/4">1/4</option>
+                        <option value="1/8">1/8</option>
+                        <option value="1/15">1/15</option>
+                        <option value="1/30">1/30</option>
+                        <option value="1/60">1/60</option>
+                        <option value="1/125" selected>1/125</option>
+                        <option value="1/250">1/250</option>
+                        <option value="1/500">1/500</option>
+                        <option value="1/1000">1/1000</option>
+                        <option value="1/2000">1/2000</option>
+                        <option value="1/4000">1/4000</option>
+                        <option value="1/8000">1/8000</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ev-steps">EV Steps:</label>
+                    <select id="ev-steps">
+                        <option value="0.5">0.5 EV</option>
+                        <option value="1.0" selected>1.0 EV</option>
+                        <option value="1.5">1.5 EV</option>
+                        <option value="2.0">2.0 EV</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ev-num-brackets">Number of Brackets:</label>
+                    <select id="ev-num-brackets">
+                        <option value="3" selected>3 Brackets</option>
+                        <option value="5">5 Brackets</option>
+                        <option value="7">7 Brackets</option>
+                        <option value="9">9 Brackets</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ev-priority">Adjustment Priority:</label>
+                    <select id="ev-priority">
+                        <option value="shutter" selected>Shutter Speed</option>
+                        <option value="aperture">Aperture</option>
+                        <option value="iso">ISO</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ev-frames">Frames per Bracket:</label>
+                    <input type="number" id="ev-frames" min="1" max="100" value="10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="ev-delay">Delay Between Shots:</label>
+                    <div class="delay-input-group">
+                        <input type="number" id="ev-delay" min="0" max="86400" value="0" step="0.5">
+                        <select id="ev-delay-unit">
+                            <option value="1">Seconds</option>
+                            <option value="60">Minutes</option>
+                            <option value="3600">Hours</option>
+                        </select>
+                    </div>
+                    <small class="help-text">Optional delay between each shot in all generated brackets</small>
+                    <small class="help-text">For timelapse: set longer delays (up to 24 hours)</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="ev-modal-cancel" class="btn">Cancel</button>
+                <button id="ev-modal-generate" class="btn primary">Generate</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="import-preset-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Import Preset</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="import-options">
+                    <div class="form-group">
+                        <label for="import-json">Paste JSON:</label>
+                        <textarea id="import-json" placeholder="Paste preset JSON here..." rows="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Or upload a JSON file:</label>
+                        <input type="file" id="import-file" accept=".json">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="import-modal-cancel" class="btn">Cancel</button>
+                <button id="import-modal-import" class="btn primary">Import</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container">
+        <!-- Toasts will be added here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

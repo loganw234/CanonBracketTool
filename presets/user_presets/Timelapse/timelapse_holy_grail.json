@@ -1,0 +1,38 @@
+{
+  "name": "[Time-lapse] Holy Grail Day-to-Night",
+  "description": "Automated exposure ramping for sunset/sunrise time-lapses. 3 brackets allow selecting optimal exposure in post. 15s delay = 4 sequences/minute. Adjust delay for desired playback speed.",
+  "brackets": [
+    {
+      "name": "Dark",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/250",
+      "frames": 200,
+      "delay": 15
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/125",
+      "frames": 200,
+      "delay": 15
+    },
+    {
+      "name": "Bright",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/60",
+      "frames": 200,
+      "delay": 15
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "timelapse_holy_grail"
+}

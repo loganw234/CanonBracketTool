@@ -1,0 +1,29 @@
+{
+  "id": "full_moon",
+  "name": "Full Moon HDR",
+  "description": "High dynamic range capture for full moon",
+  "capture_mode": "standard",
+  "brackets": [
+    {
+      "name": "Highlights",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/500",
+      "frames": 40
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 8.0,
+      "shutter_speed": "1/250",
+      "frames": 40
+    },
+    {
+      "name": "Shadows",
+      "iso": 100,
+      "aperture": 5.6,
+      "shutter_speed": "1/125",
+      "frames": 20
+    }
+  ]
+}

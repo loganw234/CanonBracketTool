@@ -1,0 +1,49 @@
+{
+  "name": "Supermoon Tight 5-Bracket",
+  "description": "True half-stop spacing, 2 EV range - maximum blending precision",
+  "brackets": [
+    {
+      "name": "EV-1.0",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/400",
+      "frames": 3
+    },
+    {
+      "name": "EV-0.5",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/250",
+      "frames": 3
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/160",
+      "frames": 3
+    },
+    {
+      "name": "EV+0.5",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/125",
+      "frames": 3
+    },
+    {
+      "name": "EV+1.0",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/80",
+      "frames": 3
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "supermoon_tight_5"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "[Product] Reflective Surfaces",
+  "description": "HDR for chrome/glass/reflective products. 5-bracket exposure handles specular highlights and deep reflections. Single focus plane since products are typically on flat surface.",
+  "brackets": [
+    {
+      "name": "Shadows",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/15",
+      "frames": 1
+    },
+    {
+      "name": "EV-0.5",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/30",
+      "frames": 1
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/60",
+      "frames": 1
+    },
+    {
+      "name": "EV+0.5",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/125",
+      "frames": 1
+    },
+    {
+      "name": "Highlights",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/250",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "product_reflective"
+}

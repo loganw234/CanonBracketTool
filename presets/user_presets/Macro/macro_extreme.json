@@ -1,0 +1,21 @@
+{
+  "name": "[Macro] Extreme - Beyond 1:1",
+  "description": "For reversed lenses, extension tubes, or microscope adapters. Very small step size (1) for sub-millimeter DOF, 40 steps to cover tiny subjects, slow speed for precision.",
+  "brackets": [
+    {
+      "name": "Base Exposure",
+      "iso": 100,
+      "aperture": 5.6,
+      "shutter_speed": "1/4",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 40,
+    "step_size": 1,
+    "speed": 1,
+    "direction": "near"
+  },
+  "id": "macro_extreme"
+}

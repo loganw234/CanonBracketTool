@@ -1,0 +1,63 @@
+{
+  "name": "[Architecture] Interior HDR",
+  "description": "Wide dynamic range for interiors with windows. 7-bracket exposure handles bright windows and dark corners. Use 2-second timer or remote to eliminate camera shake on longer exposures.",
+  "brackets": [
+    {
+      "name": "Deep Shadows",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1",
+      "frames": 1
+    },
+    {
+      "name": "Shadows",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/2",
+      "frames": 1
+    },
+    {
+      "name": "EV-1",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/4",
+      "frames": 1
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/8",
+      "frames": 1
+    },
+    {
+      "name": "EV+1",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/15",
+      "frames": 1
+    },
+    {
+      "name": "Highlights",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/30",
+      "frames": 1
+    },
+    {
+      "name": "Bright Windows",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/60",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "architecture_interior"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "[Landscape] Golden Hour HDR",
+  "description": "HDR for high-contrast sunrise/sunset. 5-bracket exposure preserves sky detail and shadow information. Focus stack disabled - use hyperfocal or single f/11 focus.",
+  "brackets": [
+    {
+      "name": "Shadows",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/15",
+      "frames": 1
+    },
+    {
+      "name": "EV-0.5",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/30",
+      "frames": 1
+    },
+    {
+      "name": "Normal",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/60",
+      "frames": 1
+    },
+    {
+      "name": "EV+0.5",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/125",
+      "frames": 1
+    },
+    {
+      "name": "Highlights",
+      "iso": 100,
+      "aperture": 11,
+      "shutter_speed": "1/250",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": false,
+    "steps": 10,
+    "step_size": 3,
+    "speed": 2,
+    "direction": "near"
+  },
+  "id": "landscape_golden_hour"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "[Macro] Jewelry - Fine Detail",
+  "description": "Focus stack for jewelry/watches at 1:1 magnification. Shoots at f/8 for optical sharpness, 15 focus steps covers ~5mm depth. Use diffused lighting to avoid hot spots.",
+  "brackets": [
+    {
+      "name": "Base Exposure",
+      "iso": 100,
+      "aperture": 8,
+      "shutter_speed": "1/10",
+      "frames": 1
+    }
+  ],
+  "focus_stack": {
+    "enabled": true,
+    "steps": 15,
+    "step_size": 2,
+    "speed": 1,
+    "direction": "near"
+  },
+  "id": "macro_jewelry"
+}
