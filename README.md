@@ -24,16 +24,16 @@ A web-based application for controlling Canon cameras to create exposure bracket
 Here are some screenshots of the application interface:
 
 ![Main Interface](Screenshots/Screenshot%202025-11-03%20211531.png)
-*Main application interface showing camera controls and bracketing settings*
+
 
 ![Preset Management](Screenshots/Screenshot%202025-11-03%20211540.png)
-*Preset management interface for saving and loading bracketing configurations*
+
 
 ![Capture Settings](Screenshots/Screenshot%202025-11-03%20211552.png)
-*Detailed capture settings configuration panel*
+
 
 ![Results View](Screenshots/Screenshot%202025-11-03%20211623.png)
-*Results view showing captured images and metadata*
+
 
 ## Requirements
 
