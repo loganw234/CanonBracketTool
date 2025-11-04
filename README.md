@@ -1,6 +1,6 @@
 # Canon Exposure Bracketing Tool
 
-A web-based application for controlling Canon cameras to create exposure bracketed sequences, particularly optimized for moon photography and other specialized photography techniques.
+A Python/web-based application for controlling Canon cameras to create exposure bracketed sequences, particularly optimized for moon photography and other specialized photography techniques.
 
 ## Features
 
@@ -43,7 +43,7 @@ Here are some screenshots of the application interface:
 - Flask and Flask-SocketIO (see requirements.txt)
 
 ## Installation
-
+# IMPORTANT: You MUST exit EOS Utility and/or EOS Webcam Utility completely when using this tool or they will mark your device as busy.
 1. Clone this repository:
    ```
    git clone https://github.com/loganw234/CanonBracketTool.git
@@ -71,9 +71,10 @@ Here are some screenshots of the application interface:
 
 3. Use the web interface to:
    - Connect to your camera
-   - Create or select presets
+   - Create or select preset
    - Configure capture settings
-   - Execute capture sequences
+   - Run "Take Test Shots" to verify settings are valid for each bracket
+   - Execute capture sequence and wait for final result, fast mode works best.
 
 ## Important Camera Settings
 
@@ -82,14 +83,15 @@ For best results:
 - Turn off image stabilization when using a tripod
 - Use a stable tripod for long exposure sequences
 - Ensure your camera has sufficient battery and memory card space
+- Frame your shot before connecting to the PC
 
 ## Project Structure
 
 - `app.py` - Main Flask application
-- `canon_edsdk.py` - Python wrapper for Canon EDSDK
+- `canon_edsdk.py` - Python wrapper for Canon EDSDK, if you are familiar with Python, this with EDSDK.dll can be used in your own files.
 - `EDSDK.dll` - Canon SDK library for Windows
 - `camera/` - Camera control modules
-  - `camera_interface.py` - Interface to Canon EDSDK
+  - `camera_interface.py` - Interface to Canon EDSDK, look here for a reference on how to use canon_edsdk.py if curious.
   - `capture_controller.py` - Controls capture sequences
   - `exposure_calculator.py` - Calculates exposure settings
 - `presets/` - Preset management
