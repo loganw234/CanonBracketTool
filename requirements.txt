@@ -2,3 +2,4 @@ flask==2.2.5
 flask-socketio==5.1.1
 python-engineio==4.2.1
 python-socketio==5.4.0
+simple-websocket==1.1.0
