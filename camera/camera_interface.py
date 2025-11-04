@@ -165,8 +165,8 @@ class CameraInterface:
             ae_mode = self.camera.get_property(EdsPropertyID_.AEMode)
             print(f"Current camera AE Mode: {ae_mode}")
             
-            # Check if camera is in Manual mode (0 is Manual mode in most Canon cameras)
-            if ae_mode == 0:
+            # Check if camera is in Manual mode (3 is Manual mode in most Canon cameras)
+            if ae_mode == 3:
                 print("✓ Camera is in Manual mode")
                 return True
             else:
